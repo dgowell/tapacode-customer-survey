@@ -1,6 +1,6 @@
 <div id="custom-popup-form">
     <h2>Customer Survey</h2>
-    <form method="post">
+    <form method="post" action="<?php echo plugin_dir_url( __FILE__ ) . 'google-sheets-api.php'; ?>">
         <!-- Add a hidden input field for the order number -->
         <input type="hidden" id="order-number" name="order-number" value="">
 
@@ -52,13 +52,19 @@
         </select>
         <br>
         <label for="consideration-of-competition">Did you consider other options before placing this order?</label>
-        <select id="consideration-of-competition" name="consideration-of-competition">
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-        </select>
+        <div>
+            <input type="radio" id="consideration-of-competition-yes" name="consideration-of-competition" value="yes">
+            <label for="consideration-of-competition-yes">Yes</label>
+        </div>
+        <div>
+            <input type="radio" id="consideration-of-competition-no" name="consideration-of-competition" value="no">
+            <label for="consideration-of-competition-no">No</label>
+        </div>
         <br>
-        <label for="considered-products">If yes, which products did you consider?</label>
-        <textarea id="considered-products" name="considered-products"></textarea>
+        <div id="consideration-of-competition-container" style="display:none;">
+            <label for="considered-products">If yes, which products did you consider?</label>
+            <textarea id="considered-products" name="considered-products"></textarea>
+        </div>
         <br>
         <label for="purchase-decision">What made you decide to buy from WooWoo?</label>
         <textarea id="purchase-decision" name="purchase-decision"></textarea>
@@ -108,6 +114,25 @@ infoQualityRadios.forEach((radio) => {
             infoQualityContainer.style.display = 'block';
         } else {
             infoQualityContainer.style.display = 'none';
+        }
+    });
+});
+
+// Get a reference to the radio buttons for the fifth question and the sixth question textarea
+const competitionRadios = document.querySelectorAll('input[name="consideration-of-competition"]');
+const competitionTextarea = document.querySelector('#consideration-of-competition-container');
+
+// Add an event listener to each radio button for the fifth question
+competitionRadios.forEach((radio) => {
+    radio.addEventListener('change', (event) => {
+        // Get the value of the selected radio button
+        const competition = event.target.value;
+
+        // If the value is yes, show the sixth question
+        if (competition === 'yes') {
+            competitionTextarea.style.display = 'block';
+        } else {
+            competitionTextarea.style.display = 'none';
         }
     });
 });
