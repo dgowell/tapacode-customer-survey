@@ -1,0 +1,12 @@
+{
+    "name": "tapacode/customer-survey",
+    "authors": [
+        {
+            "name": "Joel Cormack",
+            "email": "dgowellkomrak@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.15"
+    }
+}
