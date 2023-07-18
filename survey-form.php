@@ -29,28 +29,7 @@
             <textarea id="quality-of-info-feedback" name="quality-of-info-feedback"></textarea>
         </div>
         <br>
-        <label for="source-of-awareness">Where did you first hear about us?</label>
-        <select id="source-of-awareness" name="source-of-awareness">
-            <option value="social-media">Social Media</option>
-            <option value="search-engines">Search Engines (e.g. Google)</option>
-            <option value="word-of-mouth">Word of Mouth</option>
-            <option value="advertisement">Advertisement</option>
-            <option value="other">Other - please specify</option>
-        </select>
-        <br>
-        <label for="customer-category">Where will your new purchase be used?</label>
-        <select id="customer-category" name="customer-category">
-            <option value="boat">Boat</option>
-            <option value="motor-vehicle">Motor Vehicle</option>
-            <option value="garden-building">Garden Building</option>
-            <option value="home">Home</option>
-            <option value="glamping-camping-site">Glamping/Camping Site</option>
-            <option value="allotment-community-garden">Allotment/Community Garden</option>
-            <option value="school-nursery">School/Nursery</option>
-            <option value="church-cemetery">Church/Cemetery</option>
-            <option value="other">Other - please specify</option>
-        </select>
-        <br>
+       
         <label for="consideration-of-competition">Did you consider other options before placing this order?</label>
         <div>
             <input type="radio" id="consideration-of-competition-yes" name="consideration-of-competition" value="yes">

@@ -22,8 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $easeOfUseFeedback = $_POST['ease-of-use-feedback'];
     $qualityOfInfo = $_POST['quality-of-info'];
     $qualityOfInfoFeedback = $_POST['quality-of-info-feedback'];
-    $sourceOfAwareness = $_POST['source-of-awareness'];
-    $customerCategory = $_POST['customer-category'];
     $considerationOfCompetition = $_POST['consideration-of-competition'];
     $consideredProducts = $_POST['considered-products'];
     $purchaseDecision = $_POST['purchase-decision'];
@@ -35,8 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $easeOfUseFeedback, 
         $qualityOfInfo, 
         $qualityOfInfoFeedback, 
-        $sourceOfAwareness, 
-        $customerCategory, 
+        
         $considerationOfCompetition, 
         $consideredProducts,
         $purchaseDecision,

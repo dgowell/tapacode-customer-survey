@@ -13,6 +13,9 @@
 defined( 'ABSPATH' ) || exit;
 
 
+// Include the file that connects to the Google Sheets API
+include( plugin_dir_path( __FILE__ ) . 'add-questions-to-order-form.php' );
+
 // Enqueue necessary scripts and styles for the popup form
 function custom_popup_form_enqueue_scripts() {
     // Enqueue your custom scripts and styles here
