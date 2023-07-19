@@ -19,6 +19,34 @@ function add_select_field( $checkout ) {
         )
     ), $checkout->get_value( 'source-of-awareness' ));
 
+    // Add a text field for the "Other" option
+    ?>
+    <div class="woocommerce-additional-fields">
+        <div class="woocommerce-additional-fields__field-wrapper">
+            <p class="form-row form-row-wide" id="other-source-of-awareness-field" style="display:none;">
+                <label for="other-source-of-awareness"><?php _e( 'Please specify', 'woocommerce' ); ?> <span class="required">*</span></label>
+                <input type="text" class="input-text" name="other-source-of-awareness" id="other-source-of-awareness" required>
+            </p>
+        </div>
+    </div>
+    <?php
+
+    // Add JavaScript to show or hide the text field based on the selected value
+    ?>
+    <script>
+        jQuery(document).ready(function($) {
+            $('#source-of-awareness').change(function() {
+                if ($(this).val() == 'other') {
+                    $('#other-source-of-awareness-field').show();
+                    $('#other-source-of-awareness').prop('required', true);
+                } else {
+                    $('#other-source-of-awareness-field').hide();
+                    $('#other-source-of-awareness').prop('required', false);
+                }
+            });
+        });
+    </script>
+    <?php
 }
 
 
@@ -42,6 +70,33 @@ function add_question_where_will_product_be_used( $checkout ) {
             'other'   => __('Other - please specify', 'woocommerce' )
         )
     ), $checkout->get_value( 'customer-category' ));
+// Add a text field for the "Other" option
+?>
+<div class="woocommerce-additional-fields">
+    <div class="woocommerce-additional-fields__field-wrapper">
+        <p class="form-row form-row-wide" id="other-customer-category-field" style="display:none;">
+            <label for="other-customer-category"><?php _e( 'Please specify', 'woocommerce' ); ?> <span class="required">*</span></label>
+            <input type="text" class="input-text" name="other-customer-category" id="other-customer-category" required>
+        </p>
+    </div>
+</div>
+<?php
 
+// Add JavaScript to show or hide the text field based on the selected value
+?>
+<script>
+    jQuery(document).ready(function($) {
+        $('#customer-category').change(function() {
+            if ($(this).val() == 'other') {
+                $('#other-customer-category-field').show();
+                $('#other-customer-category').prop('required', true);
+            } else {
+                $('#other-customer-category-field').hide();
+                $('#other-customer-category').prop('required', false);
+            }
+        });
+    });
+</script>
+<?php
 }
 ?>

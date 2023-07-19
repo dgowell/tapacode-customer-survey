@@ -73,7 +73,7 @@ function process_order_form_inputs( $order_id ) {
         'valueInputOption' => 'RAW'
     ];
 
-    $result = $service->spreadsheets_values->update($spreadsheet_id, $range, $body, $params);
+    $result = $service->spreadsheets_values->append($spreadsheet_id, $range, $body, $params);
     return $order;
 }
 

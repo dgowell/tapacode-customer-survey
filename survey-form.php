@@ -1,8 +1,9 @@
+
 <div id="custom-popup-form">
     <h2>Customer Survey</h2>
     <form method="post" action="<?php echo plugin_dir_url( __FILE__ ) . 'google-sheets-api.php'; ?>">
         <!-- Add a hidden input field for the order number -->
-        <input type="hidden" id="order-number" name="order-number" value="">
+        <input type="hidden" id="order-number" name="order-number" value="<? echo $order_id?>">
 
         <label for="ease-of-use">Ease of Using the Website:</label>
         <?php for ($i = 1; $i <= 10; $i++) { ?>
