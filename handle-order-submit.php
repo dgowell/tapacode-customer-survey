@@ -2,13 +2,16 @@
 
 
 
-add_action( 'woocommerce_checkout_create_order', 'process_order_form_inputs' );
+add_action( 'woocommerce_checkout_update_order_meta', 'process_order_form_inputs' );
 
-function process_order_form_inputs( $order ) {
+function process_order_form_inputs( $order_id ) {
     require_once __DIR__ . '/vendor/autoload.php'; // Replace with the path to your autoload.php file
     //putenv('GOOGLE_APPLICATION_CREDENTIALS=' . realpath('./tapacode-customer-survey-e5bb3ef21d23.json')); // Replace with the path to your service account key file
     //putenv('GOOGLE_APPLICATION_CREDENTIALS=./tapacode-customer-survey-e5bb3ef21d23.json');
     //$credentialsPath = getenv('GOOGLE_APPLICATION_CREDENTIALS');
+
+    // Get an instance of the WC_Order object
+    $order = wc_get_order( $order_id );
 
     $client = new Google_Client();
     //$client->useApplicationDefaultCredentials();
@@ -19,7 +22,7 @@ function process_order_form_inputs( $order ) {
     $service = new Google_Service_Sheets($client);
 
     $spreadsheet_id = '15Mzar6OtUH7kYTtVxbwFosXSETIiVe4POZfoCzTRlFQ'; // Replace with the ID of your Google Sheets spreadsheet
-    $range = 'Sheet1!A2:F2'; // Replace with the range of cells you want to insert data into
+    $range = 'Sheet1!A2:K2'; // Replace with the range of cells you want to insert data into
     
     // Get the value of the source of awareness field
     $sourceOfAwareness = $_POST['source-of-awareness'];
@@ -28,8 +31,8 @@ function process_order_form_inputs( $order ) {
     $customerCategory = $_POST['customer-category'];
 
     // Add the source of awareness and customer category as order meta data
-   // $order->update_meta_data( 'source_of_awareness', $sourceOfAwareness );
-   // $order->update_meta_data( 'customer_category', $customerCategory );
+   $order->update_meta_data( 'source_of_awareness', $sourceOfAwareness );
+   $order->update_meta_data( 'customer_category', $customerCategory );
 
     $orderNumber = $order->get_id();
     $orderKey = $order->get_order_key();
@@ -37,35 +40,26 @@ function process_order_form_inputs( $order ) {
     $postcode = $order->get_shipping_postcode();
     //get the product names
     // Get and Loop Over Order Items
-    $products[] = array();
+    $products = array();
     foreach ( $order->get_items() as $item_id => $item ) {
     $items = $order->get_items();
         //get name for each item and add to priducts array
         $products[] = $item->get_name();
     }    
 
-    //echo the values
-    echo 'order number: ' . $orderNumber . '<br>';
-    echo 'amount: ' . $amount . '<br>';
-    echo 'postcode: ' . $postcode . '<br>';
-    echo 'products: ' . implode(', ', $products) . '<br>';
-
-    //echo 'product two: ' . $products[1] . '<br>';
-    //echo 'product three: ' . $products[2] . '<br>';
-    //echo 'product four: ' . $products[3] . '<br>';
-    //echo 'product five: ' . $products[4] . '<br>';    
-    echo 'source of awareness: ' . $sourceOfAwareness . '<br>';
-    echo 'customer category: ' . $customerCategory . '<br>';
-        
-
-    //add the order number, amount, postcode, product names, source of awareness and customer category to the google sheet
-
+    //add the orderNumber, amount ,postcode, each product (checking if the product exists if not just printing and empty string) sources of awareness and customer category to the google sheet
+    
     $values = [
         [
             $orderNumber,
+            $orderKey,
             $amount,
             $postcode,
-            'test',
+            $products[0] ?? '',
+            $products[1] ?? '',
+            $products[2] ?? '',
+            $products[3] ?? '',
+            $products[4] ?? '',
             $sourceOfAwareness,
             $customerCategory
         ],
