@@ -1,0 +1,125 @@
+/* Style the custom-popup-form container */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.overlay.open {
+    display: flex;
+}
+#custom-popup-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: #4C6B89;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    max-height: 85vh;
+}
+#custom-popup-form.open {
+    display: block;
+}
+ .radio-group {
+    display: flex;
+    justify-content: space-between;
+ }
+ .radio-group.even {
+    justify-content: space-evenly;
+ }
+ .radio {
+    text-align: center;
+    width: 20%;
+ }
+
+/* Line up the form elements */
+#custom-popup-form label,
+#custom-popup-form input,
+#custom-popup-form textarea {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    max-width: 400px;
+}
+#custom-popup-form label.label-small {
+    font-size: 0.9rem;
+}
+#custom-popup-form label {
+    font-size: 1.4rem;
+}
+/* Style the submit button */
+#custom-popup-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Hide the feedback containers by default */
+#ease-of-use-feedback-container,
+#quality-of-info-container,
+#consideration-of-competition-container {
+    display: none;
+}
+.question {
+    margin: 25px 0;
+    padding: 15px;
+    background: #ffffff24;
+    color: #fff;
+}
+body.popup-open {
+    overflow: hidden;
+}
+.popup-header {
+    border-bottom: 1px solid #ddd;
+}
+.popup-header h2 {
+    margin-right: 15px;
+}
+.popup-subheader p {
+  color: #ddd;
+}
+#close-popup-button {
+    border-color: black;
+    position: absolute;
+    top: 0;
+    font-size: 2rem;;
+    right: 10px;
+    height: 50px;
+    width: 50px;
+    border: none;
+    color: #fff;
+
+    
+}
+.question.selected {
+    background-color: #fff;
+    color: #000;
+}
+/* Style the custom-popup-form container to be full width on small screens */
+@media (max-width: 600px) {
+    #custom-popup-form {
+        width: 100%;
+        top: 0;
+        max-width: none;
+        left: 0;
+        transform: none;
+        border-radius: 0;
+        max-height: 100vh;
+    }
+}

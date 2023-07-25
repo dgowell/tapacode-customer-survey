@@ -21,6 +21,7 @@ include( plugin_dir_path( __FILE__ ) . 'handle-order-submit.php' );
 // Enqueue necessary scripts and styles for the popup form
 function custom_popup_form_enqueue_scripts() {
     // Enqueue your custom scripts and styles here
+    wp_enqueue_style( 'custom-popup-form', plugin_dir_url( __FILE__ ) . 'css/custom-popup-form.css' );
 }
 add_action('wp_enqueue_scripts', 'custom_popup_form_enqueue_scripts');
 
@@ -51,7 +52,7 @@ function custom_popup_form_display( $order_id ) {
         // Include the file that connects to the Google Sheets API
         include( plugin_dir_path( __FILE__ ) . 'google-sheets-api.php' );
     } else {
-        echo '<div id="custom-popup-form">Order id not available here</div>';
+        echo '<p>Couldnt get order id</p>';
     }
 }
 add_action('woocommerce_thankyou', 'custom_popup_form_display');
