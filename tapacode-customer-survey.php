@@ -15,15 +15,22 @@ defined( 'ABSPATH' ) || exit;
 
 // Include the file that connects to the Google Sheets API
 include( plugin_dir_path( __FILE__ ) . 'add-questions-to-order-form.php' );
-
 include( plugin_dir_path( __FILE__ ) . 'handle-order-submit.php' );
 
 // Enqueue necessary scripts and styles for the popup form
 function custom_popup_form_enqueue_scripts() {
     // Enqueue your custom scripts and styles here
     wp_enqueue_style( 'custom-popup-form', plugin_dir_url( __FILE__ ) . 'css/custom-popup-form.css' );
+
+    wp_enqueue_script( 'custom-popup-form-js', plugin_dir_url( __FILE__ ) . 'js/custom-popup-form.js', array( 'jquery' ), '1.0', true );
+
+    // Pass data from PHP to JavaScript using wp_localize_script()
+    wp_localize_script( 'custom-popup-form-js', 'myScriptData', array(
+        'pluginDirUrl' => plugin_dir_url( __FILE__ )
+    ) );
 }
 add_action('wp_enqueue_scripts', 'custom_popup_form_enqueue_scripts');
+
 
 // Display the popup form on the order completion page
 function custom_popup_form_display( $order_id ) {
@@ -36,11 +43,7 @@ function custom_popup_form_display( $order_id ) {
 
         // Get an instance of the WC_Order object
         $order = wc_get_order( $order_id );
-
-        // Get the order key
         $order_key = $order->get_order_key();
-
-        // Get the order number
         $order_number = $order->get_order_number();
 
         // Include the survey form HTML from the survey-form.php file
@@ -51,6 +54,7 @@ function custom_popup_form_display( $order_id ) {
 
         // Include the file that connects to the Google Sheets API
         include( plugin_dir_path( __FILE__ ) . 'google-sheets-api.php' );
+        
     } else {
         echo '<p>Couldnt get order id</p>';
     }

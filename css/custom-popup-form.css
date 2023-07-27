@@ -1,7 +1,7 @@
 /* Style the custom-popup-form container */
 .overlay {
     position: fixed;
-    top: 0;
+    top: 100%;
     left: 0;
     width: 100%;
     height: 100%;
@@ -10,10 +10,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    display: none;
+    z-index: 9999;
+    transition: top 0.5s ease-in-out;
 }
 .overlay.open {
-    display: flex;
+    top: 0;
+}
+#custom-form-success {
+    display:none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-color: #fff;
+    color: #212121;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    max-height: 85vh;
+    z-index: 10000;
+    transition: top 0.5s ease-in-out;
+}
+#custom-form-success.open {
+    display: block;
 }
 #custom-popup-form {
     display: none;
@@ -29,6 +52,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
     max-height: 85vh;
+    z-index: 10000;
+    transition: top 0.5s ease-in-out;
 }
 #custom-popup-form.open {
     display: block;
@@ -111,9 +136,18 @@ body.popup-open {
     background-color: #fff;
     color: #000;
 }
+#close-success-button {
+    color: #4c6b89;
+    border-color: #4c6b89;
+    border-radius: 30px;
+}
+#close-success-button:hover {
+    background-color: #4c6b89;
+    color: #fff;
+}
 /* Style the custom-popup-form container to be full width on small screens */
 @media (max-width: 600px) {
-    #custom-popup-form {
+    #custom-popup-form.open {
         width: 100%;
         top: 0;
         max-width: none;

@@ -5,22 +5,13 @@
 add_action( 'woocommerce_checkout_update_order_meta', 'process_order_form_inputs' );
 
 function process_order_form_inputs( $order_id ) {
-    require_once __DIR__ . '/vendor/autoload.php'; // Replace with the path to your autoload.php file
-    //putenv('GOOGLE_APPLICATION_CREDENTIALS=' . realpath('./tapacode-customer-survey-e5bb3ef21d23.json')); // Replace with the path to your service account key file
-    //putenv('GOOGLE_APPLICATION_CREDENTIALS=./tapacode-customer-survey-e5bb3ef21d23.json');
-    //$credentialsPath = getenv('GOOGLE_APPLICATION_CREDENTIALS');
-
+    require_once __DIR__ . '/vendor/autoload.php'; // Replace with the path to your autoload.php fil
     // Get an instance of the WC_Order object
     $order = wc_get_order( $order_id );
-
     $client = new Google_Client();
-    //$client->useApplicationDefaultCredentials();
     $client->setAuthConfig( __DIR__ . '/tapacode-customer-survey-e5bb3ef21d23.json');
-
     $client->setScopes(['https://www.googleapis.com/auth/spreadsheets']);
-
     $service = new Google_Service_Sheets($client);
-
     $spreadsheet_id = '15Mzar6OtUH7kYTtVxbwFosXSETIiVe4POZfoCzTRlFQ'; // Replace with the ID of your Google Sheets spreadsheet
     $range = 'Sheet1!A2:K2'; // Replace with the range of cells you want to insert data into
     
@@ -74,6 +65,7 @@ function process_order_form_inputs( $order_id ) {
     ];
 
     $result = $service->spreadsheets_values->append($spreadsheet_id, $range, $body, $params);
+    $order->save();
     return $order;
 }
 
