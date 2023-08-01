@@ -40,6 +40,8 @@
 }
 #custom-popup-form {
     display: none;
+    font-weight: 400;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -54,6 +56,11 @@
     max-height: 85vh;
     z-index: 10000;
     transition: top 0.5s ease-in-out;
+    max-width: 600px; /* Add this line to set the maximum width */
+}
+#custom-popup-form input[type="radio"],
+#custom-popup-form label {
+  width: 20px; /* Set an appropriate width */
 }
 #custom-popup-form.open {
     display: block;
@@ -68,6 +75,12 @@
  .radio {
     text-align: center;
     width: 20%;
+    display: flex;
+    align-items: center; 
+    flex-direction: column;
+ }
+ .hidden {
+    display: none;
  }
 
 /* Line up the form elements */
@@ -77,7 +90,6 @@
     display: block;
     margin: 10px auto;
     width: 100%;
-    max-width: 400px;
 }
 #custom-popup-form label.label-small {
     font-size: 0.9rem;
@@ -114,7 +126,7 @@ body.popup-open {
     border-bottom: 1px solid #ddd;
 }
 .popup-header h2 {
-    margin-right: 15px;
+    margin-right: 35px;
 }
 .popup-subheader p {
   color: #ddd;
@@ -124,14 +136,22 @@ body.popup-open {
     position: absolute;
     top: 0;
     font-size: 2rem;;
-    right: 10px;
+    right: 0;
     height: 50px;
     width: 50px;
     border: none;
+    color:rgb(255, 255, 255);
+    padding:0;
+    border-radius: 0 0 0 10px;
+}
+#close-popup-button:hover, 
+#close-popup-button:focus {
+    background-color: #4C6B89;
     color: #fff;
+    border-radius: 30px;;
 }
 .question.selected {
-    background-color: #fff;
+    background-color: #FFF;
     color: #000;
 }
 #close-success-button {
@@ -148,11 +168,11 @@ body.popup-open {
     #custom-popup-form.open {
         width: 100%;
         top: 0;
-        max-width: none;
         left: 0;
         transform: none;
         border-radius: 0;
         max-height: 100vh;
+        max-width: 600px; /* Add this line to set the maximum width */
     }
     #custom-form-success {
         max-width: 80%;

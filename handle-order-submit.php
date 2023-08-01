@@ -11,13 +11,15 @@ function process_order_form_inputs( $order_id ) {
     $client->setScopes(['https://www.googleapis.com/auth/spreadsheets']);
     $service = new Google_Service_Sheets($client);
     $spreadsheet_id = '15Mzar6OtUH7kYTtVxbwFosXSETIiVe4POZfoCzTRlFQ'; // Replace with the ID of your Google Sheets spreadsheet
-    $range = 'Sheet1!A2:K2'; // Replace with the range of cells you want to insert data into
+    $range = 'Sheet1!A2:M2'; // Replace with the range of cells you want to insert data into
     
     // Get the value of the source of awareness field
     $sourceOfAwareness = $_POST['source-of-awareness'];
+    $otherSourceOfAwareness = $_POST['other-source-of-awareness'];
 
     // Get the value of the customer category field
-    $customerCategory = $_POST['customer-category'];
+    $customerCategory = $_POST['where-will-product-be-used'];
+    $otherCustomerCategory = $_POST['other-where-will-product-be-used'];
 
     // Add the source of awareness and customer category as order meta data
    $order->update_meta_data( 'source_of_awareness', $sourceOfAwareness );
@@ -50,7 +52,9 @@ function process_order_form_inputs( $order_id ) {
             $products[3] ?? '',
             $products[4] ?? '',
             $sourceOfAwareness,
-            $customerCategory
+            $otherSourceOfAwareness,
+            $customerCategory,
+            $otherCustomerCategory,
         ],
     ];
 

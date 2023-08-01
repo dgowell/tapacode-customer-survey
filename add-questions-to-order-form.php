@@ -19,44 +19,55 @@ function add_select_field( $checkout ) {
         )
     ), $checkout->get_value( 'source-of-awareness' ));
 
-    // Add a text field for the "Other" option
-    ?>
-    <div class="woocommerce-additional-fields">
-        <div class="woocommerce-additional-fields__field-wrapper">
-            <p class="form-row form-row-wide" id="other-source-of-awareness-field" style="display:none;">
-                <label for="other-source-of-awareness"><?php _e( 'Please specify', 'woocommerce' ); ?> <span class="required">*</span></label>
-                <input type="text" class="input-text" name="other-source-of-awareness" id="other-source-of-awareness" required>
-            </p>
-        </div>
-    </div>
-    <?php
+    $other_source_of_awareness_class = array( 'form-row-wide', 'other-source-of-awareness-wrapper' );
+if ( $checkout->get_value( 'customer-source-of-awareness' ) !== 'other' ) {
+    // If the previous field doesn't have "Other" selected, hide the field and remove the "required" attribute
+    $other_source_of_awareness_class[] = 'hidden';
+    $other_source_of_awareness_required = false;
+} else {
+    // If the previous field has "Other" selected, show the field and make it required
+    $other_source_of_awareness_required = true;
+}
+
+woocommerce_form_field( 'other-source-of-awareness', array(
+    'type'          => 'text',
+    'class'         => $other_source_of_awareness_class,
+    'label'         => __( 'Please specify', 'woocommerce' ),
+    'required'      => $other_source_of_awareness_required,
+    'placeholder'   => '',
+    'autocomplete' => 'other-source-of-awareness',
+), $checkout->get_value( 'other-source-of-awareness' ));
+   
 
     // Add JavaScript to show or hide the text field based on the selected value
     ?>
-    <script>
-        jQuery(document).ready(function($) {
-            $('#source-of-awareness').change(function() {
-                if ($(this).val() == 'other') {
-                    $('#other-source-of-awareness-field').show();
-                    $('#other-source-of-awareness').prop('required', true);
-                } else {
-                    $('#other-source-of-awareness-field').hide();
-                    $('#other-source-of-awareness').prop('required', false);
-                }
-            });
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const customerSourceOfAwarenessSelect = document.getElementById('source-of-awareness');
+        const otherSourceOfAwarenessWrapper = document.querySelector('.other-source-of-awareness-wrapper');
+
+        customerSourceOfAwarenessSelect.addEventListener('change', () => {
+            if (customerSourceOfAwarenessSelect.value === 'other') {
+                otherSourceOfAwarenessWrapper.classList.remove('hidden');
+                document.getElementById('other-source-of-awareness').required = true;
+            } else {
+                otherSourceOfAwarenessWrapper.classList.add('hidden');
+                document.getElementById('other-source-of-awareness').required = false;
+            }
         });
-    </script>
-    <?php
+    });
+</script>
+<?php
 }
 
 
 add_action( 'woocommerce_after_checkout_billing_form', 'add_question_where_will_product_be_used' );
 
 function add_question_where_will_product_be_used( $checkout ) {
-//add a select field with the label "Where will your new purchase be used?" and the options Boat, Motor Vehicle, Garden Building, Home, Glamping/Camping Site, Allotment/Community Garden, School/Nursery, Church/Cemetery, and Other - please specify
-    woocommerce_form_field( 'customer-category', array(
+    // Add a select field with the label "Where will your new purchase be used?" and the options Boat, Motor Vehicle, Garden Building, Home, Glamping/Camping Site, Allotment/Community Garden, School/Nursery, Church/Cemetery, and Other - please specify
+    woocommerce_form_field( 'where-will-product-be-used', array(
         'type'          => 'select',
-        'class'         => array('customer-category form-row-wide'),
+        'class'         => array('where-will-product-be-used form-row-wide'),
         'label'         => __('Where will your new purchase be used?'),
         'options'       => array(
             'boat'   => __('Boat', 'woocommerce' ),
@@ -69,34 +80,45 @@ function add_question_where_will_product_be_used( $checkout ) {
             'church-cemetery'   => __('Church/Cemetery', 'woocommerce' ),
             'other'   => __('Other - please specify', 'woocommerce' )
         )
-    ), $checkout->get_value( 'customer-category' ));
-// Add a text field for the "Other" option
-?>
-<div class="woocommerce-additional-fields">
-    <div class="woocommerce-additional-fields__field-wrapper">
-        <p class="form-row form-row-wide" id="other-customer-category-field" style="display:none;">
-            <label for="other-customer-category"><?php _e( 'Please specify', 'woocommerce' ); ?> <span class="required">*</span></label>
-            <input type="text" class="input-text" name="other-customer-category" id="other-customer-category" required>
-        </p>
-    </div>
-</div>
-<?php
+    ), $checkout->get_value( 'where-will-product-be-used' ));
 
-// Add JavaScript to show or hide the text field based on the selected value
-?>
-<script>
-    jQuery(document).ready(function($) {
-        $('#customer-category').change(function() {
-            if ($(this).val() == 'other') {
-                $('#other-customer-category-field').show();
-                $('#other-customer-category').prop('required', true);
-            } else {
-                $('#other-customer-category-field').hide();
-                $('#other-customer-category').prop('required', false);
-            }
+    $other_where_will_product_be_used_class = array( 'form-row-wide', 'other-where-will-product-be-used-wrapper' );
+    if ( $checkout->get_value( 'where-will-product-be-used' ) !== 'other' ) {
+        // If the previous field doesn't have "Other" selected, hide the field and remove the "required" attribute
+        $other_where_will_product_be_used_class[] = 'hidden';
+        $other_where_will_product_be_used_required = false;
+    } else {
+        // If the previous field has "Other" selected, show the field and make it required
+        $other_where_will_product_be_used_required = true;
+    }
+    
+    woocommerce_form_field( 'other-where-will-product-be-used', array(
+        'type'          => 'text',
+        'class'         => $other_where_will_product_be_used_class,
+        'label'         => __( 'Please specify', 'woocommerce' ),
+        'required'      => $other_where_will_product_be_used_required,
+        'placeholder'   => '',
+        'autocomplete' => 'other-where-will-product-be-used',
+    ), $checkout->get_value( 'other-where-will-product-be-used' ));
+
+    // Add JavaScript to show or hide the text field based on the selected value
+    ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const whereWillProductBeUsedSelect = document.getElementById('where-will-product-be-used');
+            const otherWhereWillProductBeUsedWrapper = document.querySelector('.other-where-will-product-be-used-wrapper');
+
+            whereWillProductBeUsedSelect.addEventListener('change', () => {
+                if (whereWillProductBeUsedSelect.value === 'other') {
+                    otherWhereWillProductBeUsedWrapper.classList.remove('hidden');
+                    document.getElementById('other-where-will-product-be-used').required = true;
+                } else {
+                    otherWhereWillProductBeUsedWrapper.classList.add('hidden');
+                    document.getElementById('other-where-will-product-be-used').required = false;
+                }
+            });
         });
-    });
-</script>
-<?php
+    </script>
+    <?php
 }
 ?>

@@ -95,7 +95,6 @@ easeOfUseRadios.forEach((radio) => {
             });
             document.querySelector('.question:nth-child(3)').classList.add('selected');
             //move the window to the next question
-            window.scrollTo(0,document.body.scrollHeight);
         }
 
     });

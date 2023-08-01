@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Tapacode Customer Survey
  * Description: A plugin to add a customer survey to the checkout complete page.
- * Version: 1.0.0
+ * Version: 1.1.1
  * Author: Tapacode
  * Author URI: https://tapacode.com
  * Text Domain: tapacode-customer-survey

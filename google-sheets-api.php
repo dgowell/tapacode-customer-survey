@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // If the row was found, update the values in the row
     if ($row_index != -1) {
         $row_index = $row_index + 1; // Add 1 to account for the header row
-        $range = 'Sheet1!L' . $row_index . ':T' . $row_index; // Update the range to include only the row
+        $range = 'Sheet1!N' . $row_index . ':V' . $row_index; // Update the range to include only the row
         $body = new Google_Service_Sheets_ValueRange([
             'values' => $values
         ]);
