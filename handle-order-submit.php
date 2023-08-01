@@ -1,6 +1,4 @@
-<?
-
-
+<?php
 
 add_action( 'woocommerce_checkout_update_order_meta', 'process_order_form_inputs' );
 
@@ -68,6 +66,5 @@ function process_order_form_inputs( $order_id ) {
     $order->save();
     return $order;
 }
-
 
 ?>

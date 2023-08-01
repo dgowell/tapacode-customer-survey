@@ -21,7 +21,7 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 80%;
+    max-width: 50%;
     text-align: center;
     transform: translate(-50%, -50%);
     z-index: 9999;
@@ -129,20 +129,18 @@ body.popup-open {
     width: 50px;
     border: none;
     color: #fff;
-
-    
 }
 .question.selected {
     background-color: #fff;
     color: #000;
 }
 #close-success-button {
-    color: #4c6b89;
+    color: #fff;
     border-color: #4c6b89;
     border-radius: 30px;
 }
 #close-success-button:hover {
-    background-color: #4c6b89;
+    background-color: #668baf;
     color: #fff;
 }
 /* Style the custom-popup-form container to be full width on small screens */
@@ -155,5 +153,8 @@ body.popup-open {
         transform: none;
         border-radius: 0;
         max-height: 100vh;
+    }
+    #custom-form-success {
+        max-width: 80%;
     }
 }

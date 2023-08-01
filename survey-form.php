@@ -9,7 +9,7 @@
         </div>
         <form id="customer-satisfaction-form">
             <!-- Add a hidden input field for the order number -->
-            <input type="hidden" id="order-number" name="order-number" value="<? echo $order_id?>">
+            <input type="hidden" id="order-key" name="order-key" value="<?php echo $order_key ?>">
 
             <div class="question selected">
                 <label for="ease-of-use">How would you rate the ease of using our website?</label>
@@ -86,7 +86,7 @@
                             value="<?php echo $i; ?>" required>
                         <label for="recommendation-<?php echo $i; ?>"><?php echo $i; ?></label>
                         <label class="label-small" for="quality-of-info-<?php echo $i; ?>">
-                            <?php echo ($i == 1) ? 'Extremely Unlikely' : ''; ?><?php echo ($i == 5) ? 'Extremely Likely' : ''; ?></label>
+                            <?php echo ($i == 1) ? 'Very Unlikely' : ''; ?><?php echo ($i == 5) ? 'Very Likely' : ''; ?></label>
                     </div>
                     <?php } ?>
                 </div>

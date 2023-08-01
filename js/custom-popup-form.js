@@ -63,12 +63,12 @@ jQuery('#customer-satisfaction-form').on('submit', function(event) {
 // Get the overlay and custom-popup-form elements
 var customPopupForm = document.querySelector('#custom-popup-form');
 
-// Wait for 2 seconds and add the open class to the elements
+// Wait for 4 seconds and add the open class to the elements
 setTimeout(function() {
     console.log('open');
     overlay.classList.add('open');
     customPopupForm.classList.add('open');
-}, 2000);
+}, 4000);
 
 
 /*
@@ -173,12 +173,14 @@ competitionRadios.forEach((radio) => {
 */
 const purchaseDecisionTextarea = document.querySelector('#purchase-decision');
 const parentQuestion = purchaseDecisionTextarea.closest('.question');
+const recommendationQuestion = document.querySelector('.question label[for="recommendation"]').parentNode;
 
 purchaseDecisionTextarea.addEventListener('focus', () => {
     document.querySelectorAll('.question label').forEach((label) => {
             label.classList.remove('selected');
         });
     parentQuestion.classList.add('selected');
+    
 });
 
 purchaseDecisionTextarea.addEventListener('blur', () => {
