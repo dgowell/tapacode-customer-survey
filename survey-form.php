@@ -1,4 +1,4 @@
-<div class="overlay">
+<div id="tapacode-custom-overlay" class="overlay">
     <div id="custom-popup-form">
         <button id="close-popup-button">&times;</button>
         <div class="popup-header">

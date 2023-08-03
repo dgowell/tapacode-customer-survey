@@ -11,7 +11,7 @@ function process_order_form_inputs( $order_id ) {
     $client->setScopes(['https://www.googleapis.com/auth/spreadsheets']);
     $service = new Google_Service_Sheets($client);
     $spreadsheet_id = '15Mzar6OtUH7kYTtVxbwFosXSETIiVe4POZfoCzTRlFQ'; // Replace with the ID of your Google Sheets spreadsheet
-    $range = 'Sheet1!A2:M2'; // Replace with the range of cells you want to insert data into
+    $range = 'Sheet1!A2:N2'; // Replace with the range of cells you want to insert data into
     
     // Get the value of the source of awareness field
     $sourceOfAwareness = $_POST['source-of-awareness'];
@@ -37,11 +37,14 @@ function process_order_form_inputs( $order_id ) {
         //get name for each item and add to priducts array
         $products[] = $item->get_name();
     }    
+    //get the current date and time in format 03/08/2023 14:46:57
+    $timestamp = date("d/m/Y H:i:s");
 
     //add the orderNumber, amount ,postcode, each product (checking if the product exists if not just printing and empty string) sources of awareness and customer category to the google sheet
     
     $values = [
         [
+            $timestamp,
             $orderNumber,
             $orderKey,
             $amount,

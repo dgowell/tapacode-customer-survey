@@ -20,7 +20,7 @@ include( plugin_dir_path( __FILE__ ) . 'handle-order-submit.php' );
 // Enqueue necessary scripts and styles for the popup form
 function custom_popup_form_enqueue_scripts() {
     // Enqueue your custom scripts and styles here
-    wp_enqueue_style( 'custom-popup-form', plugin_dir_url( __FILE__ ) . 'css/custom-popup-form.css' );
+    wp_enqueue_style( 'custom-popup-form', plugin_dir_url( __FILE__ ) . 'css/custom-popup-form.css' , array(), '1.0.0');
 
     wp_enqueue_script( 'custom-popup-form-js', plugin_dir_url( __FILE__ ) . 'js/custom-popup-form.js', array( 'jquery' ), '1.0', true );
 

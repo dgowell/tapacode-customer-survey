@@ -1,5 +1,5 @@
 /* Style the custom-popup-form container */
-.overlay {
+#tapacode-custom-overlay .overlay {
     position: fixed;
     top: 100%;
     left: 0;
@@ -13,10 +13,10 @@
     z-index: 9999;
     transition: top 0.5s ease-in-out;
 }
-.overlay.open {
+#tapacode-custom-overlay .overlay.open {
     top: 0;
 }
-#custom-form-success {
+#tapacode-custom-overlay #custom-form-success {
     display:none;
     position: fixed;
     top: 50%;
@@ -35,10 +35,10 @@
     z-index: 10000;
     transition: top 0.5s ease-in-out;
 }
-#custom-form-success.open {
+#tapacode-custom-overlay #custom-form-success.open {
     display: block;
 }
-#custom-popup-form {
+#tapacode-custom-overlay #custom-popup-form {
     display: none;
     font-weight: 400;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -58,21 +58,21 @@
     transition: top 0.5s ease-in-out;
     max-width: 600px; /* Add this line to set the maximum width */
 }
-#custom-popup-form input[type="radio"],
-#custom-popup-form label {
+#tapacode-custom-overlay  #custom-popup-form input[type="radio"],
+#tapacode-custom-overlay  #custom-popup-form label {
   width: 20px; /* Set an appropriate width */
 }
-#custom-popup-form.open {
+#tapacode-custom-overlay  #custom-popup-form.open {
     display: block;
 }
- .radio-group {
+#tapacode-custom-overlay .radio-group {
     display: flex;
     justify-content: space-between;
  }
- .radio-group.even {
+ #tapacode-custom-overlay .radio-group.even {
     justify-content: space-evenly;
  }
- .radio {
+ #tapacode-custom-overlay  .radio {
     text-align: center;
     width: 20%;
     display: flex;
@@ -80,25 +80,25 @@
     flex-direction: column;
  }
  .hidden {
-    display: none;
+    display: none!important;
  }
 
 /* Line up the form elements */
-#custom-popup-form label,
-#custom-popup-form input,
-#custom-popup-form textarea {
+#tapacode-custom-overlay  #custom-popup-form label,
+#tapacode-custom-overlay  #custom-popup-form input,
+#tapacode-custom-overlay  #custom-popup-form textarea {
     display: block;
     margin: 10px auto;
     width: 100%;
 }
-#custom-popup-form label.label-small {
+#tapacode-custom-overlay #custom-popup-form label.label-small {
     font-size: 0.9rem;
 }
-#custom-popup-form label {
+#tapacode-custom-overlay  #custom-popup-form label {
     font-size: 1.4rem;
 }
 /* Style the submit button */
-#custom-popup-form input[type="submit"] {
+#tapacode-custom-overlay #custom-popup-form input[type="submit"] {
     background-color: #4CAF50;
     color: #fff;
     border: none;
@@ -108,30 +108,30 @@
 }
 
 /* Hide the feedback containers by default */
-#ease-of-use-feedback-container,
-#quality-of-info-container,
-#consideration-of-competition-container {
+#tapacode-custom-overlay  #ease-of-use-feedback-container,
+#tapacode-custom-overlay  #quality-of-info-container,
+#tapacode-custom-overlay  #consideration-of-competition-container {
     display: none;
 }
-.question {
+#tapacode-custom-overlay .question { 
     margin: 25px 0;
     padding: 15px;
     background: #ffffff24;
     color: #fff;
 }
-body.popup-open {
+#tapacode-custom-overlay .popup-open {  
     overflow: hidden;
 }
-.popup-header {
+#tapacode-custom-overlay  .popup-header {
     border-bottom: 1px solid #ddd;
 }
-.popup-header h2 {
+#tapacode-custom-overlay  .popup-header h2 {
     margin-right: 35px;
 }
-.popup-subheader p {
+#tapacode-custom-overlay  .popup-subheader p {
   color: #ddd;
 }
-#close-popup-button {
+#tapacode-custom-overlay  #close-popup-button {
     border-color: black;
     position: absolute;
     top: 0;
@@ -144,28 +144,28 @@ body.popup-open {
     padding:0;
     border-radius: 0 0 0 10px;
 }
-#close-popup-button:hover, 
-#close-popup-button:focus {
+#tapacode-custom-overlay #close-popup-button:hover, 
+#tapacode-custom-overlay  #close-popup-button:focus {
     background-color: #4C6B89;
     color: #fff;
     border-radius: 30px;;
 }
-.question.selected {
+#tapacode-custom-overlay  .question.selected {
     background-color: #FFF;
     color: #000;
 }
-#close-success-button {
+#tapacode-custom-overlay  #close-success-button {
     color: #fff;
     border-color: #4c6b89;
     border-radius: 30px;
 }
-#close-success-button:hover {
+#tapacode-custom-overlay  #close-success-button:hover {
     background-color: #668baf;
     color: #fff;
 }
 /* Style the custom-popup-form container to be full width on small screens */
 @media (max-width: 600px) {
-    #custom-popup-form.open {
+    #tapacode-custom-overlay  #custom-popup-form.open {
         width: 100%;
         top: 0;
         left: 0;
@@ -174,7 +174,7 @@ body.popup-open {
         max-height: 100vh;
         max-width: 600px; /* Add this line to set the maximum width */
     }
-    #custom-form-success {
+    #tapacode-custom-overlay  #custom-form-success {
         max-width: 80%;
     }
 }

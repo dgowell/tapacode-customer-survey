@@ -11,10 +11,12 @@ function add_select_field( $checkout ) {
         'class'         => array('source-of-awareness form-row-wide'),
         'label'         => __('How did you hear about us?'),
         'options'       => array(
+            ''   => __('Please select', 'woocommerce' ),
             'web-search'   => __('Web search (Google, Bing, etc)', 'woocommerce' ),
             'referral-word-of-mouth'   => __('Referral/word of mouth', 'woocommerce' ),
             'social-media'   => __('Social Media (Facebook, Instagram, etc)', 'woocommerce' ),
             'advertisements'   => __('Advertisements', 'woocommerce' ),
+            'trade-show'   => __('Trade Show', 'woocommerce' ),
             'other'   => __('Other - please specify', 'woocommerce' )
         )
     ), $checkout->get_value( 'source-of-awareness' ));
@@ -70,6 +72,7 @@ function add_question_where_will_product_be_used( $checkout ) {
         'class'         => array('where-will-product-be-used form-row-wide'),
         'label'         => __('Where will your new purchase be used?'),
         'options'       => array(
+            ''   => __('Please select', 'woocommerce' ),
             'boat'   => __('Boat', 'woocommerce' ),
             'motor-vehicle'   => __('Motor Vehicle', 'woocommerce' ),
             'garden-building'   => __('Garden Building', 'woocommerce' ),
