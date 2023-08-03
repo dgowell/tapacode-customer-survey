@@ -4,13 +4,14 @@ add_action( 'woocommerce_checkout_update_order_meta', 'process_order_form_inputs
 
 function process_order_form_inputs( $order_id ) {
     require_once __DIR__ . '/vendor/autoload.php'; // Replace with the path to your autoload.php fil
+    require_once 'config.php';
     // Get an instance of the WC_Order object
     $order = wc_get_order( $order_id );
     $client = new Google_Client();
     $client->setAuthConfig( __DIR__ . '/tapacode-customer-survey-e5bb3ef21d23.json');
     $client->setScopes(['https://www.googleapis.com/auth/spreadsheets']);
     $service = new Google_Service_Sheets($client);
-    $spreadsheet_id = '15Mzar6OtUH7kYTtVxbwFosXSETIiVe4POZfoCzTRlFQ'; // Replace with the ID of your Google Sheets spreadsheet
+    $spreadsheet_id = SPREADSHEET_ID;
     $range = 'Sheet1!A2:N2'; // Replace with the range of cells you want to insert data into
     
     // Get the value of the source of awareness field

@@ -1,11 +1,12 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once 'config.php';
 $client = new Google_Client();
 $client->setAuthConfig( __DIR__ . '/tapacode-customer-survey-e5bb3ef21d23.json');
 $client->setScopes(['https://www.googleapis.com/auth/spreadsheets']);
 $service = new Google_Service_Sheets($client);
-$spreadsheet_id = '15Mzar6OtUH7kYTtVxbwFosXSETIiVe4POZfoCzTRlFQ';
+$spreadsheet_id = SPREADSHEET_ID;
 $range = 'Sheet1!A2:Z'; //the whole sheet A to Z
 
 // Call the spreadsheets.values.get method to retrieve the values in the sheet
