@@ -13,65 +13,81 @@ function process_order_form_inputs( $order_id ) {
     $service = new Google_Service_Sheets($client);
     $spreadsheet_id = SPREADSHEET_ID;
     $range = 'Sheet1!A2:N2'; // Replace with the range of cells you want to insert data into
+
+    // Get the values from the sheet
+    $response = $service->spreadsheets_values->get( $spreadsheet_id, $range );
+    $currentValues = $response->getValues();
+
+    // Search for the row that matches the order ID
+    $row_index = -1;
+    foreach ($currentValues as $index => $row) {
+        if ($row[1] == $order_id) {
+            $row_index = $index + 1; // Add 1 to account for the header row
+            break;
+        }
+    }
     
-    // Get the value of the source of awareness field
-    $sourceOfAwareness = $_POST['source-of-awareness'];
-    $otherSourceOfAwareness = $_POST['other-source-of-awareness'];
+    //if the row is not found then add the order to the google sheet
+    if ($row_index == -1) {
+        // Get the value of the source of awareness field
+        $sourceOfAwareness = $_POST['source-of-awareness'];
+        $otherSourceOfAwareness = $_POST['other-source-of-awareness'];
 
-    // Get the value of the customer category field
-    $customerCategory = $_POST['where-will-product-be-used'];
-    $otherCustomerCategory = $_POST['other-where-will-product-be-used'];
+        // Get the value of the customer category field
+        $customerCategory = $_POST['where-will-product-be-used'];
+        $otherCustomerCategory = $_POST['other-where-will-product-be-used'];
 
-    // Add the source of awareness and customer category as order meta data
-   $order->update_meta_data( 'source_of_awareness', $sourceOfAwareness );
-   $order->update_meta_data( 'customer_category', $customerCategory );
+        // Add the source of awareness and customer category as order meta data
+    $order->update_meta_data( 'source_of_awareness', $sourceOfAwareness );
+    $order->update_meta_data( 'customer_category', $customerCategory );
 
-    $orderNumber = $order->get_id();
-    $orderKey = $order->get_order_key();
-    $amount = $order->get_total();
-    $postcode = $order->get_shipping_postcode();
-    //get the product names
-    // Get and Loop Over Order Items
-    $products = array();
-    foreach ( $order->get_items() as $item_id => $item ) {
-    $items = $order->get_items();
-        //get name for each item and add to priducts array
-        $products[] = $item->get_name();
-    }    
-    //get the current date and time in format 03/08/2023 14:46:57
-    $timestamp = date("d/m/Y H:i:s");
+        $orderNumber = $order->get_id();
+        $orderKey = $order->get_order_key();
+        $amount = $order->get_total();
+        $postcode = $order->get_shipping_postcode();
+        //get the product names
+        // Get and Loop Over Order Items
+        $products = array();
+        foreach ( $order->get_items() as $item_id => $item ) {
+        $items = $order->get_items();
+            //get name for each item and add to priducts array
+            $products[] = $item->get_name();
+        }    
+        //get the current date and time in format 03/08/2023 14:46:57
+        $timestamp = date("d/m/Y H:i:s");
 
-    //add the orderNumber, amount ,postcode, each product (checking if the product exists if not just printing and empty string) sources of awareness and customer category to the google sheet
-    
-    $values = [
-        [
-            $timestamp,
-            $orderNumber,
-            $orderKey,
-            $amount,
-            $postcode,
-            $products[0] ?? '',
-            $products[1] ?? '',
-            $products[2] ?? '',
-            $products[3] ?? '',
-            $products[4] ?? '',
-            $sourceOfAwareness,
-            $otherSourceOfAwareness,
-            $customerCategory,
-            $otherCustomerCategory,
-        ],
-    ];
+        //add the orderNumber, amount ,postcode, each product (checking if the product exists if not just printing and empty string) sources of awareness and customer category to the google sheet
+        
+        $values = [
+            [
+                $timestamp,
+                $orderNumber,
+                $orderKey,
+                $amount,
+                $postcode,
+                $products[0] ?? '',
+                $products[1] ?? '',
+                $products[2] ?? '',
+                $products[3] ?? '',
+                $products[4] ?? '',
+                $sourceOfAwareness,
+                $otherSourceOfAwareness,
+                $customerCategory,
+                $otherCustomerCategory,
+            ],
+        ];
 
-    $body = new Google_Service_Sheets_ValueRange([
-        'values' => $values
-    ]);
+        $body = new Google_Service_Sheets_ValueRange([
+            'values' => $values
+        ]);
 
-    $params = [
-        'valueInputOption' => 'RAW'
-    ];
+        $params = [
+            'valueInputOption' => 'RAW'
+        ];
 
-    $result = $service->spreadsheets_values->append($spreadsheet_id, $range, $body, $params);
-    $order->save();
+        $result = $service->spreadsheets_values->append($spreadsheet_id, $range, $body, $params);
+        $order->save();
+    }
     return $order;
 }
 

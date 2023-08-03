@@ -1,5 +1,5 @@
 /* Style the custom-popup-form container */
-#tapacode-custom-overlay .overlay {
+#tapacode-custom-overlay {
     position: fixed;
     top: 100%;
     left: 0;
@@ -13,7 +13,7 @@
     z-index: 9999;
     transition: top 0.5s ease-in-out;
 }
-#tapacode-custom-overlay .overlay.open {
+#tapacode-custom-overlay.open {
     top: 0;
 }
 #tapacode-custom-overlay #custom-form-success {
